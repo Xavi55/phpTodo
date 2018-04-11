@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login</title>		
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		
+		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	</head>
+	<style>
+		html
+		{
+			background-image:url('https://media.giphy.com/media/l3q2Cy90VMhfoA9BC/giphy.gif');
+			
+			/*https://media.giphy.com/media/jKYUtseVtLQDLhAd7r/giphy.gif');*/
+			height:100%;
+			background-size:cover;
+			background-repeat:no-repeat;
+		}
+		body
+		{
+			font-family:'Raleway',sans-serif;
+			opacity:.96;
+			border-radius:15px;
+			margin-top:10%;
+			margin-left:20%;
+			margin-right:20%;
+		}
+		#title
+		{
+			text-align:center;
+			background:black;
+			color:white;
+			padding-bottom:1em;
+		}
+		#newu
+		{
+			text-align:center;
+		}
+		#box
+		{	
+			top:10%;
+		}
+		.form-control
+		{
+			font-size:1em;
+		}
+		.form-control:focus
+		{
+			border:1px black solid;
+		}
+		
+		form
+		{
+			padding: 2% 2% 2% 2%;
+			font-size:1.5em;
+			border-radius:15px;
+		}
+		#gender
+		{
+			margin-right:10%;
+		}
+		#submit
+		{
+			margin-left:35%;
+			width:28%;
+		}
+		#submit:hover
+		{
+			background-color:#4d1ee8;
+			font-size:1em;
+			border:cyan 2px solid;
+		}
+		#submit:active
+		{
+			background-color: black;
+		}
+	</style>
+	<body>
+		<div id=title><h2>New Users Welcome!</h2></div>
+	
+		<div id=box>
+			<form action='../inde.php' method=post>
+				<input type=hidden name=action value=signup>
+
+				<div class="form-group">
+						<label for="fname" class="cols-sm-2 control-label">First Name</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+								<input type="text" class="form-control" name="fname" id="name"  placeholder="First Name" autofocus/>
+							</div>
+						</div>
+				</div>
+					
+					<div class="form-group">
+						<label for="name" class="cols-sm-2 control-label">Last Name</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="far fa-user fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="lname" id="name"  placeholder="Last Name"/>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="name" class="cols-sm-2 control-label">Your E-Mail</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="email" id="name"  placeholder="Email" required />
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="name" class="cols-sm-2 control-label">Your Phone No.</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa far fa-phone" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="phone" id="name"  placeholder="Phone #" maxlength=10 required />
+							</div>
+						</div>
+					</div>
+					
+					 <div class="form-group">
+                    <label for="birthDate" class="col-sm-3 control-label">Date of Birth</label>
+                    <div class="col-sm-9">
+                        <input type="date" name=bday id="birthDate" class="form-control">
+                    </div>
+                </div>
+                <br><br>
+                
+                
+               <label id=gender>Gender</label>
+               <input type="radio" name="gender" value="male"> Male
+					<input type="radio" name="gender" value="female"> Female
+					<br>
+
+
+
+<div class="form-group">
+						<label for="name" class="cols-sm-2 control-label">Password</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span 
+class="input-group-addon"><i class="fa far fa-lock" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="pass" maxlength=15/>
+							</div>
+						</div>
+					</div>
+
+		<br>
+               <input id=submit type=submit class="btn btn-primary" value ="Sign Up!">
+               <br><br>
+		
+
+			</form>
+		</div
+	</body>
+	<script>
+	</script>
+</html>
