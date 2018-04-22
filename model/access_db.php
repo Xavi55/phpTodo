@@ -1,4 +1,6 @@
 <?php
+//include('database.php');
+
 function get_categories() {
     global $db;
     $query = 'SELECT * FROM categories
@@ -24,23 +26,38 @@ function get_category_name($category_id) {
 function login($email,$pass)
 {
 	global $db;
-    $query = 'SELECT * FROM accounts WHERE password = :name AND email=:email';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':name', $email);
-    $statement->bindValue(':email', $pass);
-    $statement->execute();
-    $statement->closeCursor();
-}
-
-function signup($fname,$lname,$phone,$bday,$gender,$email,$pass)
-{
-	global $db;
-    $query = 'INSERT into accounts (email,fname,lname,phone,birthday,gender,password) 
-VALUES (:email,:fname,:lname,:phone,:bday,:gender,:pass)';
+    $query = 'SELECT * FROM accounts WHERE email=:email AND password=:pass';
     $statement = $db->prepare($query);
     $statement->bindValue(':email', $email);
-    $statement->bindValue('fname', $fname);
-    $statement->bindValue('lname', $lname);
+    $statement->bindValue(':pass', $pass);
+    $statement->execute();
+    $res=$statement->fetch();
+    $ok = $statement->rowCount();
+    $statement->closeCursor();
+	if( $ok==1 )
+	{
+		return $res;
+	} 
+	else
+	{
+		return 0;
+	}
+}
+
+
+
+
+function signup($fname, $lname, $email, $bday, $phone, $gender, $pass)
+{
+	global $db;
+    $query = "INSERT INTO accounts 
+	(email, fname, lname, phone, birthday, gender, password) 
+	VALUES
+	(:email,:fname,:lname,:phone,:bday,:gender,:pass)";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':fname', $fname);
+    $statement->bindValue(':lname', $lname);
     $statement->bindValue(':phone', $phone);
     $statement->bindValue(':bday', $bday);
     $statement->bindValue(':gender', $gender);
@@ -48,6 +65,7 @@ VALUES (:email,:fname,:lname,:phone,:bday,:gender,:pass)';
     $statement->execute();
     $statement->closeCursor();
 }
+
 
 
 
@@ -69,4 +87,5 @@ function addCat($name)
     $statement->execute();
     $statement->closeCursor();
 }
+
 ?>
