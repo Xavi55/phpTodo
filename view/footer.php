@@ -1,6 +1,6 @@
 <footer>
-    <p class="copyright">
-        &copy; <?php echo date("Y"); ?> My Guitar Shop, Inc.
+    <p>
+	<?php echo " &copy date('Y'); Kevin Gamez" ?>
     </p>
 </footer>
 </body>

@@ -12,14 +12,20 @@ case 'login':
 	$info=login($email,$pass);
 	if( $info )
 	{
+		
 		session_start();
-		$_SESSION['user'] = $info[1];
-		include('home.php');
+		$_SESSION['user'] = $info['fname'].' '.$info['lname'];
+		$_SESSION['email'] = $info['email'];
+//		var_dump($info);
+
+		include('view/home.php');
 	}
 	else
 	{
-		echo '<script>alert("Wrong Email / Password");</script>';
 		//header('Location:view/login.html');
+		header('Refresh:0');
+		echo '<script>alert("Wrong Email / Password \nPlease Try Again");//window.location.href="https://web.njit.edu/~kxg2/todo";</script>';
+
 	}
 	break;
 
@@ -35,29 +41,50 @@ case 'signup':
 		//echo "$fname $lname $email $bday $phone $gender $pass";
 
 	signup($fname, $lname, $email, $bday, $phone, $gender, $pass);
-	        //header("Refresh:5; url=index.php");
-	echo "<br><br><h1 style='text-align:center;color:white;'>Successful sign in!</h1>";
+
+	header('Location : ../');
+	echo "<br><br><h1 style='text-align:center;color:black;'>Successful sign 
+in!</h1>";
+	header('Refresh:2');	
 	break;
 
-	case 'o':
+	case 'add':
 		break;
 
-	case 'o':
+	case 'delete':
+		break;
+	
+	case 'edit':
 		break;
 
-	case 'o':
+	case 'check':
+		check( filter_input(INPUT_POST,'id') );
+		//header('Refresh:2');
+		echo 
+'<script>window.location.href="https://web.njit.edu/~kxg2/todo/";</script>';
+		break;
+
+        case 'revert':
+                check( filter_input(INPUT_POST,'id') );
+                header('Refresh:2');
+                break;
+
+	case 'logout':
+		session_unset();
+		session_destroy();
+		header('Location:view/login.html');
+		echo '<script>alert("Logout Successful");</script>';
 		break;
 
 	default:
 		if( isset($_SESSION['user']) )
 		{
-			//include('home.php');
-			header('location:home.php');
+			include('home.php');
+			//header('location:home.php');
 		}
 		else
 		{	
 			header('Location:view/login.html');	
 		}
-		break;
 }
 ?>

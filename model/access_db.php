@@ -1,31 +1,16 @@
 <?php
 //include('database.php');
 
-function get_categories() {
-    global $db;
-    $query = 'SELECT * FROM categories
-              ORDER BY categoryID';
-    $statement = $db->prepare($query);
-    $statement->execute();
-    return $statement;    
-}
-
-function get_category_name($category_id) {
-    global $db;
-    $query = 'SELECT * FROM categories
-              WHERE categoryID = :category_id';    
-    $statement = $db->prepare($query);
-    $statement->bindValue(':category_id', $category_id);
-    $statement->execute();    
-    $category = $statement->fetch();
-    $statement->closeCursor();    
-    $category_name = $category['categoryName'];
-    return $category_name;
+function test()
+{
+	echo "hello";
 }
 
 function login($email,$pass)
 {
-	global $db;
+	//global $db;	
+	$db=Database::getDB();
+	
     $query = 'SELECT * FROM accounts WHERE email=:email AND password=:pass';
     $statement = $db->prepare($query);
     $statement->bindValue(':email', $email);
@@ -44,12 +29,11 @@ function login($email,$pass)
 	}
 }
 
-
-
-
 function signup($fname, $lname, $email, $bday, $phone, $gender, $pass)
 {
-	global $db;
+	//global $db;
+	$db=Database::getDB();
+
     $query = "INSERT INTO accounts 
 	(email, fname, lname, phone, birthday, gender, password) 
 	VALUES
@@ -66,26 +50,63 @@ function signup($fname, $lname, $email, $bday, $phone, $gender, $pass)
     $statement->closeCursor();
 }
 
-
-
-
-function delCat($name) {
-    global $db;
-    $query = 'DELETE FROM categories WHERE categoryName = :name';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':name', $name);
-    $statement->execute();
-    $statement->closeCursor();
-}
-
-function addCat($name) 
+function getTasks($email)
 {
-    global $db;
-    $query = "INSERT INTO categories (categoryName) VALUES (:name)";
+    $db=Database::getDB();
+
+    $query='Select * from todos WHERE owneremail=:email AND isdone=0';
     $statement = $db->prepare($query);
-    $statement->bindValue(':name', $name);
+    $statement->bindValue(':email', $email);
+    $statement->execute();
+
+    $tasks=[];
+    while( $row=$statement->fetch() )
+    {
+       $tasks[]= $row;
+    }
+    $statement->closeCursor();
+
+    return $tasks;
+}
+
+function getDone($email)
+{
+	$db=Database::getDB();
+
+    $query='Select * from todos WHERE owneremail=:email AND isdone=1';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':email', $email);
+    $statement->execute();
+
+    $tasks=[];
+    while( $row=$statement->fetch() )
+    {
+       $tasks[]= $row;
+    }
+    $statement->closeCursor();
+
+    return $tasks;        
+}
+
+function check($id) 
+{
+	$db=Database::getDB();
+	
+    $query = 'UPDATE todos SET isdone=1 WHERE id=:id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':id', $id);
     $statement->execute();
     $statement->closeCursor();
 }
 
+function revert($id)
+{
+        $db=Database::getDB();
+       
+    $query = 'UPDATE todos SET isdone=0 WHERE id=:id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':id', $id);
+    $statement->execute();
+    $statement->closeCursor();
+}
 ?>
