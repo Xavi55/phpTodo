@@ -109,4 +109,42 @@ function revert($id)
     $statement->execute();
     $statement->closeCursor();
 }
+
+function add()
+{
+        $db=Database::getDB($email,$due,$mesg);
+     
+/*   
+    $query = 'INSERT into todos (owneremail, duedate,message,isdone) VALUES (:email,:due,:done,1);
+    $statement = $db->prepare($query);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':due', $due);
+    $statement->bindValue(':mesg', $mesg);
+    $statement->execute();
+    $statement->closeCursor();
+*/
+
+}
+
+function delete($id)
+{
+        $db=Database::getDB();
+        
+    $query = 'DELETE FROM todos WHERE id=:id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':id', $id);
+    $statement->execute();
+    $statement->closeCursor();
+}
+ 
+function edit()
+{
+	$db=Database::getDB();
+
+    $query = 'UPDATE todos SET isdone=0 WHERE id=:id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':id', $id);
+    $statement->execute();
+    $statement->closeCursor();
+}
 ?>
