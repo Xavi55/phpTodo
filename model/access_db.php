@@ -110,20 +110,18 @@ function revert($id)
     $statement->closeCursor();
 }
 
-function add()
+function add($email,$due,$mesg)
 {
-        $db=Database::getDB($email,$due,$mesg);
+        $db=Database::getDB();
      
-/*   
-    $query = 'INSERT into todos (owneremail, duedate,message,isdone) VALUES (:email,:due,:done,1);
+    $query = "INSERT into todos (owneremail, duedate,message,isdone)
+		VALUES (:email,:due,:mesg,0)";
     $statement = $db->prepare($query);
     $statement->bindValue(':email', $email);
     $statement->bindValue(':due', $due);
     $statement->bindValue(':mesg', $mesg);
     $statement->execute();
     $statement->closeCursor();
-*/
-
 }
 
 function delete($id)

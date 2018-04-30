@@ -63,10 +63,12 @@ case 'signup':
 		break;
 
 	case 'add':
-        	$id = filter_input(INPUT_POST, 'id'); 
-        	$due = filter_input(INPUT_POST, 'due'); 
+//        	$email = filter_input(INPUT_POST, 'email');
+
+        	$due = filter_input(INPUT_POST, 'due');
         	$mesg = filter_input(INPUT_POST, 'mesg');
-		add($id,$due,$mesg);
+		add($_SESSION['email'],$due,$mesg);
+		header('Location: .?action=home');
 		break;
 
 	case 'delete':
