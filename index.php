@@ -53,9 +53,9 @@ case 'signup':
 
 	signup($fname, $lname, $email, $bday, $phone, $gender, $pass);
 
-	header('Location : ../');
+	//header('Location: ../.');
 	echo "<br><br><h1 style='text-align:center;color:black;'>Successful sign in!</h1>";
-	header('Refresh:2');	
+	header('Refresh:1');	
 	break;
 
 	case 'add_page':
