@@ -135,13 +135,15 @@ function delete($id)
     $statement->closeCursor();
 }
  
-function edit()
+function edit($task,$due,$mesg)
 {
 	$db=Database::getDB();
 
-    $query = 'UPDATE todos SET isdone=0 WHERE id=:id';
+    $query = 'UPDATE todos SET duedate=:due, message=:mesg WHERE id=:id';
     $statement = $db->prepare($query);
-    $statement->bindValue(':id', $id);
+    $statement->bindValue(':due', $due);
+    $statement->bindValue(':mesg', $mesg);
+    $statement->bindValue(':id', $task);
     $statement->execute();
     $statement->closeCursor();
 }

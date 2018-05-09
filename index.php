@@ -76,7 +76,22 @@ case 'signup':
 		header('Location: .?action=home');
 		break;
 	
+	case 'edit_page':
+		$_SESSION['task'] = filter_input(INPUT_POST, 'id');
+		include('view/edit.php');
+		break;
+
 	case 'edit':
+
+                $due = filter_input(INPUT_POST, 'due');  
+                $mesg = filter_input(INPUT_POST, 'mesg');
+
+                edit($_SESSION['task'],$due,$mesg);
+
+		
+		unset($_SESSION['task']);
+
+		header('Location: .?action=home');
 		break;
 
 	case 'check':

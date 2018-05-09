@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
-   <title>Add</title>
+   <title>Edit</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <style>
 html   
@@ -27,7 +28,7 @@ body
 {
    background-color:black;
    color:white;
-   border-radius:15%;
+   border:solid white 3px;
    padding:3%;
 }
 
@@ -39,14 +40,18 @@ form
 {
    display:inline;
 }
+input
+{
+   border-radius:15px;
+}
 </style>
 
 <body>
-   <h3 id=banner class=center>Time to add a new task</h3>
+   <h3 id=banner class=center>Time to Edit a Task</h3>
    <br>
    <br>
    <form action="." method=post>
-	<input type=hidden name=action value=add>
+	<input type=hidden name=action value=edit>
 
 	<label>Due date:</label>
 	<input type=date name=due>
@@ -54,7 +59,11 @@ form
 	<label>Task:</label>
 	<input type=text name=mesg>
 	<br><br><br>
-	<input type=submit value="Add Task">
+	<input type=submit value="Submit Edit">
    </form>
+<br><br>
+   <form action="." method=post><input type=hidden name=action value=home><input
+class=btn id=logout type=submit value="Go Back"></form>
+
 </body>
 </html>
